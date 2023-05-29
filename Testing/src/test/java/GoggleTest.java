@@ -27,6 +27,8 @@ public class GoggleTest {
     public void newSearch() {
         driver.get("https://google.com");
         driver.findElement(By.name("q")).sendKeys("selenium" + Keys.ENTER);
+//        driver.findElement(By.name("q")).sendKeys("selenium");
+//        driver.findElement(By.name("btnK")).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a/h3")));
     }
 
