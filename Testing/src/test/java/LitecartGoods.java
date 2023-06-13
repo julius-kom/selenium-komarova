@@ -51,10 +51,10 @@ public class LitecartGoods {
         Assertions.assertTrue(grayColorsFromMainPage[0] == grayColorsFromMainPage[1] &&
                 grayColorsFromMainPage[1] == grayColorsFromMainPage[2]);
 
-        //проверяем, что заполнен text-decoration-color на Главной странице
+        //проверяем, что текст зачеркнутый на Главной странице
         String ifCrossedRegularPriceMain = driver.findElement(By.cssSelector("#box-campaigns .regular-price"))
-                .getCssValue("text-decoration-color");
-        Assertions.assertNotEquals(ifCrossedRegularPriceMain, "none");
+                .getCssValue("text-decoration-line");
+        Assertions.assertEquals(ifCrossedRegularPriceMain, "line-through");
 
         driver.findElement(By.cssSelector("#box-campaigns .name")).click();
 
@@ -64,10 +64,10 @@ public class LitecartGoods {
         int[] grayColorsFromDuckPage = getColor(grayAttributesFromDuckPage);
         Assertions.assertTrue(grayColorsFromDuckPage[0] == grayColorsFromDuckPage[1] &&
                 grayColorsFromDuckPage[1] == grayColorsFromDuckPage[2]);
-        //проверяем, что заполнен text-decoration-color на Уточной странице
+        //проверяем, что текст зачеркнутый на Уточной странице
         String ifCrossedRegularPriceDuck = driver.findElement(By.cssSelector(".regular-price"))
-                .getCssValue("text-decoration-color");
-        Assertions.assertNotEquals(ifCrossedRegularPriceDuck, "none");
+                .getCssValue("text-decoration-line");
+        Assertions.assertEquals(ifCrossedRegularPriceDuck, "line-through");
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LitecartGoods {
         //проверяем, что текст жирный на Главной странице
         String ifBoldSalePriceFromMainPage = driver.findElement(By.cssSelector("#box-campaigns .campaign-price"))
                 .getCssValue("font-weight");
-        Assertions.assertEquals(ifBoldSalePriceFromMainPage, "700");
+        Assertions.assertTrue(ifBoldSalePriceFromMainPage.equals("700") || ifBoldSalePriceFromMainPage.equals("bold"));
 
         driver.findElement(By.cssSelector("#box-campaigns .name")).click();
         // проверяем, что цвет красный на Уточной странице
@@ -93,7 +93,7 @@ public class LitecartGoods {
         //проверяем, что текст жирный на Уточной странице
         String ifBoldSalePriceFromDuckPage = driver.findElement(By.cssSelector(".campaign-price"))
                 .getCssValue("font-weight");
-        Assertions.assertEquals(ifBoldSalePriceFromDuckPage, "700");
+        Assertions.assertTrue(ifBoldSalePriceFromDuckPage.equals("700") || ifBoldSalePriceFromDuckPage.equals("bold"));
     }
 
     @Test
@@ -106,9 +106,6 @@ public class LitecartGoods {
                 .getCssValue("font-size");
 
         Assertions.assertTrue(getSizeOfText(sizeOfRegularPriceFromMainPage) < getSizeOfText(sizeOfSalePriceFromMainPage));
-
-        System.out.println(sizeOfRegularPriceFromMainPage);
-        System.out.println(getSizeOfText(sizeOfRegularPriceFromMainPage));
 
         driver.findElement(By.cssSelector("#box-campaigns .name")).click();
         //на Уточной
