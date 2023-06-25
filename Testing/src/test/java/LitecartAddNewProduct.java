@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Random;
 
 
 public class LitecartAddNewProduct {
@@ -24,7 +25,7 @@ public class LitecartAddNewProduct {
 
     @Test
     public void litecartAddNewProduct() throws InterruptedException {
-        String myNewProductName = "myNewProductName";
+        String myNewProductName = "myNewProductName_" + generateRandomString();
 
         String relativePath = "src/main/resources/cat.jpg";
         File file = new File(relativePath);
@@ -64,6 +65,17 @@ public class LitecartAddNewProduct {
 
         driver.findElement(By.xpath("//*[text()='" + myNewProductName + "']"));
 
+    }
+
+    public String generateRandomString() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 5; i++) {
+            char randomChar = (char) ('a' + random.nextInt(26));
+            sb.append(randomChar);
+        }
+        return sb.toString();
     }
 
     @After
